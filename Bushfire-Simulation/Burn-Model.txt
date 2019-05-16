@@ -1,0 +1,21 @@
+The function run_model(f_grid, h_grid, i_threshold, w_direction, burn_seeds) that takes as arguments the initial fuel load f_grid (ie, at time t=0), height h_grid, ignition threshold i_threshold, wind direction w_direction and a list of cells burn_seeds that are burning at time t=0, and returns a tuple containing (a) the final state of the landscape once the fire has stopped burning, and (b) the total number of cells that have been burnt by the fire (including any initially burning cells in burn_seeds).
+
+The arguments are of the following types:
+
+    f_grid: a list of lists (of dimensions M by M)
+    h_grid: a list of lists (of dimensions M by M)
+    i_threshold: an integer
+    w_direction: a string
+    burn_seeds: a list of integer tuples (i, j) where i<M and j<M
+
+The program may assume that all arguments are valid, as defined in previous questions. 
+You may find it helpful to define one or more additional functions that carry out a single step of the model run, determining the new burning state and fuel load at time t+1 on the basis of the model state at time t.
+
+Example: 
+>>> run_model([[2, 2], [2, 2]], [[1, 1], [1, 1]], 1, 'N', [(0, 0)])
+([[0, 0], [0, 0]], 4)
+>>> run_model([[2, 0], [0, 2]], [[1, 1], [1, 1]], 2, 'S', [(0, 0)])
+([[0, 0], [0, 2]], 1)
+
+
+Here in the second example [[0, 0], [0, 2]] represents the fuel load after the burning has stopped, and 1 represents the number of cells burnt. 

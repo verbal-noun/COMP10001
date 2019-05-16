@@ -1,0 +1,22 @@
+Based on the rules in parsing the scenario, your task is to write a function check_ignition(b_grid, f_grid, h_grid, i_threshold, w_direction, i, j) that takes as arguments the burning state b_grid (at time t), current fuel load f_grid (at time t), height h_grid, ignition threshold i_threshold, wind direction w_direction and coordinates i and j of a cell, and returns True if that cell will catch fire at time t+1 and False otherwise.
+
+The arguments are of the following types:
+
+    b_grid: a list of lists of Boolean values (of dimensions M by M)
+    f_grid: a list of lists of integers (of dimensions M by M)
+    h_grid: a list of lists of integers (of dimensions M by M)
+    i_threshold: an integer
+    w_direction: a string (if wind is blowing), otherwise None (if no wind is blowing)
+    i and j: integers (i<M ; j<M)
+
+
+For example:
+
+>>> check_ignition([[True, False], [False, False]], [[2, 2], [2, 2]], [[1, 1], [1, 1]], 1, 'N', 0, 1)
+True
+>>> check_ignition([[True, False], [False, False]], [[2, 0], [2, 2]], [[1, 1], [1, 1]], 1, 'N', 1, 0)
+True
+>>> check_ignition([[True, True, False], [False, False, False], [False, False, False]], [[1, 1, 1], [1, 1, 1], [1, 0, 0]], [[2, 2, 1], [2, 3, 1], [1, 1, 1]], 1, None, 0, 2)
+False
+>>> check_ignition([[True, True, False], [False, False, False], [False, False, False]], [[1, 1, 1], [1, 1, 1], [1, 0, 0]], [[2, 2, 1], [2, 3, 1], [1, 1, 1]], 2, None, 1, 1)
+True

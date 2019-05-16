@@ -1,0 +1,64 @@
+The function parse_scenario(filename) that parses a file with the structure described below, validates the contents and returns either a dictionary containing all values required to specify a model scenario if the contents are valid, or None if any of the contents are invalid.
+
+The structure of the file is as follows:
+
+    an integer specifying the width and height (M) of the square landscape grid
+    M lines, each containing M integer values (separated by commas), defining the initial fuel load of the landscape (a visual representation of the M by M grid)
+    M lines, each containing M integer values (separated by commas), defining the height of the landscape (again, a visual representation of the M by M grid)
+    an integer specifying the ignition threshold for this scenario
+    a one or two character string specifying the wind direction for this scenario (or 'None' if there is no wind)
+    one or more lines, each containing the (i,j) coordinates (row number, column number) of a cell which is burning at the start of the simulation
+
+For example, the file 'bf0.dat':
+
+bf0.dat
+2
+2,2
+0,2
+1,2
+1,2
+1
+N
+0,0
+
+
+specifies a 2 by 2 landscape:
+
+    there is an initial fuel load of 2 in three of the four cells, with a fuel load of 0 in the cell c1,0
+    the height of all cells in the first column (j=0) is 1, while the height of all cells in the second column (j=1) is 2 (ie, the landscape slopes up toward the East)
+    the ignition threshold is 1
+    a wind is blowing from the North
+    the top left cell c0,0 is burning at the start of the simulation
+
+You may assume that the input files are well-formed, but your function should ensure that:
+
+    the dimensions of the grid are a positive integer;
+    the ignition threshold is a positive integer not greater than eight;
+    the wind direction is valid; and
+    the coordinates of the burning cells are (a) located on the landscape, and (b) have non-zero initial fuel load.
+
+If all values are valid, your function should return a dictionary with key/value pairs as follows:
+
+    f_grid: a list of lists (of dimensions M by M)
+    h_grid: a list of lists (of dimensions M by M)
+    i_threshold: an integer
+    w_direction: a string or None
+    burn_seeds: a list of tuples
+
+If there is no wind, w_direction can be either an empty string '' or None.
+
+If any values are invalid, your function should return None.
+
+For example:
+>>> parse_scenario('bf0.dat')
+{'f_grid': [[2, 2], [0, 2]],
+ 'h_grid': [[1, 2], [1, 2]],
+ 'i_threshold': 1,
+ 'w_direction': 'N',
+ 'burn_seeds': [(0, 0)]}
+>>> parse_scenario('bf.dat')
+{'f_grid': [[1, 2, 1], [0, 1, 2], [0, 0, 1]],
+ 'h_grid': [[1, 1, 1], [2, 1, 2], [3, 2, 2]],
+ 'i_threshold': 1,
+ 'w_direction': 'N',
+ 'burn_seeds': [(1, 1)]}
